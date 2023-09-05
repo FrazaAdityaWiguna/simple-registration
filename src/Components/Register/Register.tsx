@@ -71,7 +71,7 @@ const Register = () => {
             flexDirection: "column",
             gap: 2,
             p: 4,
-            minWidth: { xs: "60%", lg: "40%" },
+            minWidth: { xs: "80%", md: "30%" },
           }}
         >
           <Typography
