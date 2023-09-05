@@ -1,3 +1,5 @@
+import NavBar from "@/Components/NavBar/NavBar";
+import { Container } from "@mui/material";
 import React from "react";
 
 interface Layout1Props {
@@ -6,7 +8,12 @@ interface Layout1Props {
 
 const Layout1 = (props: Layout1Props) => {
   const { children } = props;
-  return <div>{children}</div>;
+  return (
+    <>
+      <NavBar />
+      <Container maxWidth="xl">{children}</Container>
+    </>
+  );
 };
 
 export default Layout1;

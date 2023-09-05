@@ -1,9 +1,10 @@
+import Home from "@/Components/Home/Home";
 import dynamic from "next/dynamic";
 
-const Home = () => {
-  return <main>Home</main>;
+const HomePage = () => {
+  return <Home />;
 };
 
-export default dynamic(() => Promise.resolve(Home), {
+export default dynamic(() => Promise.resolve(HomePage), {
   ssr: false,
 });
