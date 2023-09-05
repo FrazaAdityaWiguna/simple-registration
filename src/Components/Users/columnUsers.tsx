@@ -1,5 +1,5 @@
 import { UserData } from "@/types/users";
-import { Button, Stack } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import { MRT_PaginationState, type MRT_ColumnDef } from "material-react-table";
 import Link from "next/link";
 
@@ -9,8 +9,12 @@ export const columnsUsers = (
 ): MRT_ColumnDef<UserData>[] => [
   {
     header: "No.",
-    Cell: ({ row }) =>
-      row.index + 1 + pagination.pageIndex * pagination.pageSize,
+    size: 10,
+    Cell: ({ row }) => (
+      <Box px={1}>
+        {row.index + 1 + pagination.pageIndex * pagination.pageSize}
+      </Box>
+    ),
   },
   {
     accessorKey: "first_name", //access nested data with dot notation
