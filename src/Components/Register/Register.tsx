@@ -107,13 +107,25 @@ const Register = () => {
             errors={errors.password}
           />
 
-          <Button variant="contained" type="submit">
+          <Button
+            variant="contained"
+            type="submit"
+            disabled={mutationRegisterUser.isLoading}
+          >
             Submit
           </Button>
         </Card>
       </Stack>
     );
-  }, [control, errors.email, errors.password, handleSubmit, onSubmit, watch]);
+  }, [
+    control,
+    errors.email,
+    errors.password,
+    handleSubmit,
+    mutationRegisterUser.isLoading,
+    onSubmit,
+    watch,
+  ]);
 
   return renderRegister;
 };

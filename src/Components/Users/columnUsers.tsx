@@ -3,10 +3,17 @@ import { Box, Button, Stack } from "@mui/material";
 import { MRT_PaginationState, type MRT_ColumnDef } from "material-react-table";
 import Link from "next/link";
 
-export const columnsUsers = (
-  deleteSingleUser: (id: number) => void,
-  pagination: MRT_PaginationState
-): MRT_ColumnDef<UserData>[] => [
+interface ColumnUsersProps {
+  deleteSingleUser: (id: number) => void;
+  isLoading: boolean;
+  pagination: MRT_PaginationState;
+}
+
+export const columnsUsers = ({
+  deleteSingleUser,
+  isLoading,
+  pagination,
+}: ColumnUsersProps): MRT_ColumnDef<UserData>[] => [
   {
     header: "No.",
     size: 10,
@@ -39,6 +46,7 @@ export const columnsUsers = (
             sx={{ textTransform: "none" }}
             component={Link}
             href={`/users/view/${cell.row.original.id}`}
+            disabled={isLoading}
           >
             View
           </Button>
@@ -48,6 +56,7 @@ export const columnsUsers = (
             size="small"
             sx={{ textTransform: "none" }}
             onClick={() => deleteSingleUser(cell.row.original.id)}
+            disabled={isLoading}
           >
             Delete
           </Button>
