@@ -5,8 +5,8 @@
   "author": "Fraza",
   "scripts": {
     "dev": "cross-env ENVFILE=env/.env.development bash scripts/run-dev.sh",
-    "build": "next build",
-    "start": "next start",
+    "build:dev": "cross-env ENVFILE=env/.env.development bash scripts/build-dev.sh",
+    "start:dev": "cross-env ENVFILE=env/.env.development bash scripts/start-dev.sh",
     "type-check": "tsc --pretty --noEmit",
     "lint": "eslint . --ext ts --ext tsx --ext js --cache --fix --max-warnings 0",
     "prepare": "husky install"
