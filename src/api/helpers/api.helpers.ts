@@ -3,4 +3,5 @@ export enum MUTATION_KEY {
   REGISTER_USER = "registerUser",
   DELETE_USER = "deleteUser",
   GET_SINGLE_USER = "singleUser",
+  LOGIN_USER = "loginUser",
 }

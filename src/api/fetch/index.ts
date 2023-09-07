@@ -1,4 +1,5 @@
 import { httpClient } from "@/config/httpClient";
+import { ApiResponseLoginType, PayloadLoginType } from "@/types/auth";
 import {
   ApiResponseDataUsers,
   ApiResponseDelete,
@@ -11,6 +12,12 @@ import {
   PayloadUpdateUser,
 } from "@/types/users";
 import { ENDPOINT } from "../endpoint";
+
+export const loginUser = (
+  payload: PayloadLoginType
+): Promise<ApiResponseLoginType> => {
+  return httpClient.post(`${ENDPOINT.LOGIN}`, payload);
+};
 
 export const getListUsers = (
   payload: PayloadGetListUser

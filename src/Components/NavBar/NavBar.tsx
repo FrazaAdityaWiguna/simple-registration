@@ -5,6 +5,7 @@ import { NavBarType } from "@/types/theme";
 import Link from "next/link";
 import {
   AppBar,
+  Avatar,
   Box,
   Button,
   Container,
@@ -12,10 +13,14 @@ import {
   Menu,
   MenuItem,
   Toolbar,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import AdbIcon from "@mui/icons-material/Adb";
 import MenuIcon from "@mui/icons-material/Menu";
+import storagePlugin from "@/plugin/storage.plugin";
+import storageKey from "@/constant/storage";
+import { useRouter } from "next/navigation";
 
 const pages: NavBarType[] = [
   {
@@ -31,9 +36,15 @@ const pages: NavBarType[] = [
     name: "Users",
   },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings: NavBarType[] = [
+  {
+    path: "logout",
+    name: "Logout",
+  },
+];
 
 const NavBar = () => {
+  const router = useRouter();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -44,13 +55,21 @@ const NavBar = () => {
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleCloseUserMenu = (menu: NavBarType) => {
+    if (menu.path === "logout") {
+      storagePlugin.remove(storageKey.storageKey);
+      router.push("/login");
+    } else {
+      router.push(menu.path);
+    }
   };
 
   return (
@@ -151,6 +170,11 @@ const NavBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Fraza" />
+              </IconButton>
+            </Tooltip>
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"
@@ -165,11 +189,14 @@ const NavBar = () => {
                 horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+              onClose={() => setAnchorElUser(null)}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {settings.map((setting: NavBarType) => (
+                <MenuItem
+                  key={setting.path}
+                  onClick={() => handleCloseUserMenu(setting)}
+                >
+                  <Typography textAlign="center">{setting.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>

@@ -2,6 +2,17 @@
 
 This project is a simple user registration and management system, allowing users to register, view, and delete user data. It utilizes the [reqres.in](https://reqres.in/) API as a mock API for testing and development purposes.
 
+## New Feature
+
+### Login
+
+For the login process, you can verify the account on the Fake API at [reqres.in](https://reqres.in/) or using:
+
+```bash
+email: eve.holt@reqres.in
+password: cityslicka
+```
+
 ## Installation
 
 To get started, follow these steps:

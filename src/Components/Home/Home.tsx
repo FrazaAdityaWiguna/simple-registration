@@ -27,7 +27,6 @@ const Home = () => {
         This project is a simple user registration and management system,
         allowing users to register, view, and delete user data. It utilizes the
         <Link href="https://reqres.in/" target="_blank">
-          {" "}
           reqres.in{" "}
         </Link>{" "}
         API as a mock API for testing and development purposes.
