@@ -1,0 +1,3 @@
+export enum REDUCER {
+  RESET_REDUCER = "RESET_REDUCER",
+}

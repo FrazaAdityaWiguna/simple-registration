@@ -12,6 +12,9 @@ import FullLayout from "./fullLayout/fullLayout";
 import storagePlugin from "@/plugin/storage.plugin";
 import storageKey from "@/constant/storage";
 import { useRouter } from "next/navigation";
+import { Provider } from "react-redux";
+import { persistor, store } from "@/stores/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -51,14 +54,18 @@ const Layouts = (props: LayoutProps) => {
     const queryClient = new QueryClient();
 
     return (
-      <ThemeProviderMui theme={themeMui}>
-        <QueryClientProvider client={queryClient}>
-          <>
-            {renderLayout()}
-            <ToastContainer />
-          </>
-        </QueryClientProvider>
-      </ThemeProviderMui>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProviderMui theme={themeMui}>
+            <QueryClientProvider client={queryClient}>
+              <>
+                {renderLayout()}
+                <ToastContainer />
+              </>
+            </QueryClientProvider>
+          </ThemeProviderMui>
+        </PersistGate>
+      </Provider>
     );
   }, [renderLayout]);
 
